@@ -1,8 +1,10 @@
 package com.ww.house;
 
-import org.springframework.data.repository.CrudRepository;
+import com.ww.person.Person;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface HouseRepository extends CrudRepository<House, Long> {
+public interface HouseRepository extends JpaRepository<House, Long> {
+    House findByOwner(Person owner);
 }

@@ -1,17 +1,17 @@
 package com.ww.child;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "meal")
-@EntityListeners(AuditingEntityListener.class)
-@Data
-class Meal {
+@Getter
+@Setter
+public final class Meal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long mealId;

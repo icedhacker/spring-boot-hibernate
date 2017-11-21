@@ -1,5 +1,5 @@
 package com.ww.house;
 
-enum HouseType {
+public enum HouseType {
     FLAT, HOUSE, ESTATE
 }

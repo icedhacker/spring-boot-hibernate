@@ -1,9 +1,9 @@
 package com.ww.child;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface ChildRepository extends CrudRepository<Child, Long> {
+public interface ChildRepository extends JpaRepository<Child, Long> {
 
 }
