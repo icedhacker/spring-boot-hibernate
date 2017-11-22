@@ -1,9 +1,6 @@
 package com.ww;
 
-import com.ww.child.ChildRepository;
-import com.ww.child.ChildService;
-import com.ww.child.ChildServiceImpl;
-import com.ww.child.MealRepository;
+import com.ww.child.*;
 import com.ww.house.HouseRepository;
 import com.ww.house.HouseService;
 import com.ww.house.HouseServiceImpl;
@@ -33,8 +30,8 @@ public class WawiConfig {
     }
 
     @Bean
-    public HouseService houseService(HouseRepository houseRepository, PersonService personService) {
-        return new HouseServiceImpl(houseRepository, personService);
+    public HouseService houseService(HouseRepository houseRepository) {
+        return new HouseServiceImpl(houseRepository);
     }
 
     @Bean

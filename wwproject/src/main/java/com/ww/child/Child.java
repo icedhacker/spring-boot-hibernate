@@ -1,7 +1,9 @@
 package com.ww.child;
 
 import com.ww.person.Person;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -11,6 +13,9 @@ import java.util.List;
 @Entity
 @Table(name = "child")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@DiscriminatorColumn(name = "gender")
 public class Child {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

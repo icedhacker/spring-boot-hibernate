@@ -3,7 +3,6 @@ package com.ww.house;
 import com.ww.WawiApplication;
 import com.ww.person.Person;
 import com.ww.util.DataLoader;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WawiApplication.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class HouseServiceTest {
-
-    @Autowired
-    private HouseRepository houseRepository;
-
     @Autowired
     private HouseService houseService;
 

@@ -2,6 +2,7 @@ package com.ww;
 
 import com.ww.child.ChildInfo;
 import com.ww.child.ChildService;
+import com.ww.child.ColorInfo;
 import com.ww.house.House;
 import com.ww.house.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class WawiController {
     @GetMapping("/child/info/{childId}")
     public ChildInfo getChildById(@NotNull @PathVariable("childId") Long childId) {
         return childService.getChildInfo(childId);
+    }
+
+    @GetMapping("/color/{childId}")
+    public ColorInfo getColorForChild(@NotNull @PathVariable("childId") Long childId) {
+        return childService.getColorInfo(childId);
     }
 }

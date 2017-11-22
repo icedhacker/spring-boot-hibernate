@@ -124,6 +124,12 @@ public final class DataLoader {
         return personRepository.save(person);
     }
 
+    public Child addChild(Person person, Child child) {
+        Person parent = personRepository.save(person);
+        child.setParent(parent);
+        return childRepository.save(child);
+    }
+
     public List<Meal> addMeals(Person person, Child child, List<Meal> meals) {
         Person parent = personRepository.save(person);
         child.setParent(parent);
