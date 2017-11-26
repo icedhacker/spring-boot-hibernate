@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class WawiController {
 
     @Autowired
@@ -36,5 +36,10 @@ public class WawiController {
     @GetMapping("/color/{childId}")
     public ColorInfo getColorForChild(@NotNull @PathVariable("childId") Long childId) {
         return childService.getColorInfo(childId);
+    }
+
+    @GetMapping("/persons/children")
+    public long[] getParentSummary() {
+        return childService.getParentSummary();
     }
 }

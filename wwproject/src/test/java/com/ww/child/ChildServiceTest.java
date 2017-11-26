@@ -44,7 +44,7 @@ public class ChildServiceTest {
         ChildInfo childInfo = childService.getChildInfo(1L);
         assertThat(childInfo).isNotNull();
         assertThat(childInfo.getChildId()).isEqualTo(expectedMeal.getChild().getChildId());
-        assertThat(childInfo.getMeal().getMealId()).isEqualTo(expectedMeal.getMealId());
+        assertThat(childInfo.getMealInfo().getMealId()).isEqualTo(expectedMeal.getMealId());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ChildServiceTest {
         Child child = dataLoader.createSampleChild(1);
         Son son = new Son(child);
         son.setBicycleColor("Red");
-        Son expectedSon = (Son)dataLoader.addChild(parent, son);
+        Son expectedSon = (Son) dataLoader.addChild(parent, son);
         ColorInfo colorInfo = childService.getColorInfo(1L);
         assertThat(colorInfo).isNotNull();
         assertThat(colorInfo.getChildId()).isEqualTo(expectedSon.getChildId());
@@ -67,11 +67,35 @@ public class ChildServiceTest {
         Child child = dataLoader.createSampleChild(1);
         Daughter daughter = new Daughter(child);
         daughter.setHairColor("Blue");
-        Daughter expectedDaughter = (Daughter)dataLoader.addChild(parent, daughter);
+        Daughter expectedDaughter = (Daughter) dataLoader.addChild(parent, daughter);
         ColorInfo colorInfo = childService.getColorInfo(1L);
         assertThat(colorInfo).isNotNull();
         assertThat(colorInfo.getChildId()).isEqualTo(expectedDaughter.getChildId());
         assertThat(colorInfo.getColor()).isEqualTo("Blue");
         assertThat(colorInfo.getColorType()).isEqualTo(ColorType.HAIR_COLOR);
+    }
+
+    @Test
+    public void whenRetrieveParentSummary_returnParentSummaryList() {
+        setupForParentSummary(5, 10);
+        setupForParentSummary(8, 8);
+        setupForParentSummary(25, 2);
+        setupForParentSummary(26, 3);
+        setupForParentSummary(15, 1);
+        setupForParentSummary(18, 4);
+        setupForParentSummary(12, 5);
+        setupForParentSummary(11, 6);
+        setupForParentSummary(10, 7);
+        setupForParentSummary(4, 9);
+        setupForParentSummary(2, 0);
+
+        childService.generateParentSummary(136L);
+        long[] parentSummaries = childService.getParentSummary();
+        assertThat(parentSummaries.length).isEqualTo(11);
+    }
+
+    private void setupForParentSummary(int parentCount, int childCount) {
+        List<Person> parents = dataLoader.loadPersons(parentCount);
+        dataLoader.loadExactCountOfChildren(childCount, parents);
     }
 }

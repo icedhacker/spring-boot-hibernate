@@ -12,4 +12,9 @@ public class PersonServiceImpl implements PersonService {
     public Person getPersonById(Long personId) {
         return personRepository.findOne(personId);
     }
+
+    @Override
+    public long countPersons() {
+        return personRepository.count();
+    }
 }

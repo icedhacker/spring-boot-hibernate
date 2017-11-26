@@ -11,11 +11,12 @@ import com.ww.util.DataLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
+@EnableScheduling
 @EnableJpaRepositories
 public class WawiConfig {
-
     @Bean
     public DataLoader dataLoader(HouseRepository houseRepository,
                                  PersonRepository personRepository,
@@ -35,7 +36,12 @@ public class WawiConfig {
     }
 
     @Bean
-    public ChildService childService(ChildRepository childRepository) {
-        return new ChildServiceImpl(childRepository);
+    public ChildService childService(ChildRepository childRepository, ParentSummaryRepository parentSummaryRepository) {
+        return new ChildServiceImpl(childRepository, parentSummaryRepository);
+    }
+
+    @Bean
+    public SchedulerJob schedulerJob(ChildService childService, PersonService personService) {
+        return new SchedulerJob(childService, personService);
     }
 }

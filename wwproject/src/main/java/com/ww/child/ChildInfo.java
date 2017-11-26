@@ -15,5 +15,5 @@ public class ChildInfo {
 
     private Person parent;
 
-    private Meal meal;
+    private MealInfo mealInfo;
 }

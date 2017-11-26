@@ -2,8 +2,11 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/wawi?useSSL=false
     username: root
-    password: root
+    password: sanath
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
     hibernate.ddl-auto: update
+
+schedule:
+  interval: 900000

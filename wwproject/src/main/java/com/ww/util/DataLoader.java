@@ -27,6 +27,8 @@ public final class DataLoader {
     private MealRepository mealRepository;
     private Random r = new Random();
 
+    private static final String CHILDREN_SIZE_LOG = "{} children loaded.";
+
     public DataLoader(HouseRepository houseRepository,
                       PersonRepository personRepository,
                       ChildRepository childRepository,
@@ -83,7 +85,44 @@ public final class DataLoader {
                 }
         );
         List<Child> children = childRepository.save(childList);
-        log.info("{} children loaded.", children.size());
+        log.info(CHILDREN_SIZE_LOG, children.size());
+        childRepository.flush();
+        return children;
+    }
+
+    public List<Child> loadRandomCountChildren(int count, int randomBound) {
+        List<Person> persons = loadPersons(count);
+
+        // Create random number of children in the db.
+        List<Child> childList = new ArrayList<>();
+
+        for (Person parent : persons) {
+            int randomNum = r.nextInt(randomBound);
+            for (int i = 0; i < randomNum; i++) {
+                Child child = createSampleChild(i);
+                child.setParent(parent);
+                childList.add(child);
+            }
+        }
+        List<Child> children = childRepository.save(childList);
+        log.info(CHILDREN_SIZE_LOG, children.size());
+        childRepository.flush();
+        return children;
+    }
+
+    public List<Child> loadExactCountOfChildren(int childCount, List<Person> persons) {
+        // Create {childCount} children in the db.
+        List<Child> childList = new ArrayList<>();
+
+        for (Person parent : persons) {
+            for (int i = 0; i < childCount; i++) {
+                Child child = createSampleChild(i);
+                child.setParent(parent);
+                childList.add(child);
+            }
+        }
+        List<Child> children = childRepository.save(childList);
+        log.info(CHILDREN_SIZE_LOG, children.size());
         childRepository.flush();
         return children;
     }
